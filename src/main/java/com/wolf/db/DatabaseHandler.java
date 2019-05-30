@@ -45,10 +45,10 @@ public class DatabaseHandler {
 
     public boolean doConnect() {
         try {
-            String driverName = "com.mysql.jdbc.Driver";
+            String driverName = "com.mysql.cj.jdbc.Driver";
             String url = "jdbc:mysql://" + this.url;
             Class.forName(driverName);
-            con = DriverManager.getConnection(this.url, this.username, this.password);
+            con = DriverManager.getConnection(url, this.username, this.password);
             System.out.println(con != null ? "connection established" : "connection failed");
         } catch (ClassNotFoundException cnfe) {
             System.out.println("There is no respective jars : "
@@ -131,6 +131,7 @@ public class DatabaseHandler {
     public boolean doClose() {
         try {
             con = null;
+            System.out.println("connection closed");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
