@@ -92,6 +92,19 @@ public class DatabaseHandler {
         return pd.executeUpdate();
     }
 
+    public boolean setAutoCommit(boolean bStatus) throws SQLException {
+        this.con.setAutoCommit(bStatus);
+        return this.con.getAutoCommit() == bStatus;
+    }
+
+    public void commitQueries() throws SQLException {
+        this.con.commit();
+    }
+
+    public void rollback() throws SQLException {
+        this.con.rollback();
+    }
+
     private PreparedStatement statementFinalised(String sqlStatement, List<Object> inputs) throws SQLException {
         PreparedStatement pd = con.prepareStatement(sqlStatement);
         for (Object obj : inputs) {
